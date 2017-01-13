@@ -1,36 +1,34 @@
--- DELETE FROM Employee;
--- DELETE FROM Department;
--- DELETE FROM Computer;
--- DELETE FROM TrainingProgram;
--- DELETE FROM ProductType;
--- DELETE FROM Product;
--- DELETE FROM Orders;
--- DELETE FROM PaymentType;
--- DELETE FROM Customer;
--- DELETE FROM TrainingProgram_Employee;
--- DELETE FROM Order_Product;
--- DELETE FROM EmployeeType;
--- DELETE FROM Customer_PaymentType;
+DELETE FROM Order_Product;
+DELETE FROM Orders;
+DELETE FROM TrainingProgram_Employee;
+DELETE FROM TrainingProgram;
+DELETE FROM PaymentType;
+DELETE FROM Product;
+DELETE FROM ProductType;
+DELETE FROM Customer;
+DELETE FROM Computer;
+DELETE FROM Employee;
+DELETE FROM EmployeeType;
+DELETE FROM Department;
 
 
 
 
-
-
-
-DROP TABLE IF EXISTS Employee;
-DROP TABLE IF EXISTS Department;
-DROP TABLE IF EXISTS Computer;
-DROP TABLE IF EXISTS TrainingProgram;
-DROP TABLE IF EXISTS ProductType;
-DROP TABLE IF EXISTS Product;
-DROP TABLE IF EXISTS Orders;
-DROP TABLE IF EXISTS PaymentType;
-DROP TABLE IF EXISTS Customer;
-DROP TABLE IF EXISTS TrainingProgram_Employee;
 DROP TABLE IF EXISTS Order_Product;
+DROP TABLE IF EXISTS Orders;
+DROP TABLE IF EXISTS TrainingProgram_Employee;
+DROP TABLE IF EXISTS TrainingProgram;
+DROP TABLE IF EXISTS PaymentType;
+DROP TABLE IF EXISTS Product;
+DROP TABLE IF EXISTS ProductType;
+DROP TABLE IF EXISTS Customer;
+DROP TABLE IF EXISTS Computer;
+DROP TABLE IF EXISTS Employee;
 DROP TABLE IF EXISTS EmployeeType;
-DROP TABLE IF EXISTS Customer_PaymentType;
+DROP TABLE IF EXISTS Department;
+
+
+
 
 
 CREATE TABLE `Department` (
@@ -128,7 +126,7 @@ CREATE TABLE `ProductType` (
 	`Format` TEXT NOT NULL
 );
 
-insert into ProductType values (null, "Instrument", "Physical")
+insert into ProductType values (null, "Instrument", "Physical");
 
 
 
@@ -246,7 +244,7 @@ CREATE TABLE `Order_Product` (
 insert into Order_Product select
 	null, o.OrderId, p.ProductId
 	from Orders o, Product p, Customer c
-	where o.OrderStatus = "Active" and c.FirstName = "Ben" and c.LastName = "Retersdor" and p.Name = "Guitar" and o.CustomerId = c.CustomerId;
+	where o.OrderStatus = "Active" and c.FirstName = "Ben" and c.LastName = "Retersdor" and p.Title = "Guitar" and o.CustomerId = c.CustomerId;
 
 
 
@@ -255,13 +253,18 @@ insert into Order_Product select
 
 
 
-CREATE TABLE `Customer_PaymentType` (
-	`Customer_PaymentTypeId` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	`CustomerId` INTEGER NOT NULL,
-	`PaymentTypeId` INTEGER NOT NULL,
-	FOREIGN KEY (`CustomerId`) REFERENCES `Customer`(`CustomerId`),
-	FOREIGN KEY (`PaymentTypeId`) REFERENCES `PaymentType`(`PaymentTypeId`)
-);
+-- CREATE TABLE `Customer_PaymentType` (
+-- 	`Customer_PaymentTypeId` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+-- 	`CustomerId` INTEGER NOT NULL,
+-- 	`PaymentTypeId` INTEGER NOT NULL,
+-- 	FOREIGN KEY (`CustomerId`) REFERENCES `Customer`(`CustomerId`),
+-- 	FOREIGN KEY (`PaymentTypeId`) REFERENCES `PaymentType`(`PaymentTypeId`)
+-- );
+
+-- insert into Customer_PaymentType select 
+-- 	null, c.CustomerId, pt.PaymentTypeId
+-- 	from Customer c, PaymentType pt
+-- 	where 
 
 
 
