@@ -126,6 +126,7 @@ CREATE TABLE `Customer` (
 );
 
 insert into Customer values (null, "Allie", "Guillory", "12/19/1994", 0, 0);
+insert into Customer values (null, "Ben", "Retersdor", "5/13/2012", 0, 0);
 
 
 
@@ -166,10 +167,14 @@ insert into Product select
 CREATE TABLE `PaymentType` (
 	`PaymentTypeId` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`Name` TEXT NOT NULL,
-	`AccountNumber` TEXT NOT NULL
+	`AccountNumber` TEXT NOT NULL,
+	`CustomerId` INTEGER NOT NULL
 );
 
-insert into PaymentType values (null, "Visa", "11111111111112");
+insert into PaymentType select
+	null, "Visa", "11111111111112", c.CustomerId
+	from Customer c 
+	where c.FirstName = "Ben" and c.LastName = "Retersdor";
 
 
 
@@ -189,6 +194,11 @@ CREATE TABLE `Orders` (
 	FOREIGN KEY (`CustomerId`) REFERENCES `Customer`(`CustomerId`),
 	FOREIGN KEY (`PaymentTypeId`) REFERENCES `PaymentType`(`PaymentTypeId`)
 );
+
+insert into Orders select
+	null, "Active", c.CustomerId, pt.PaymentTypeId
+	from Customer c, PaymentType pt
+	where c.FirstName = "Ben" and c.LastName = "Retersdor" and pt.Name = "Visa" and pt.CustomerId = c.CustomerId;
 
 
 
