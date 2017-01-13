@@ -41,8 +41,8 @@ CREATE TABLE `Employee` (
 	`HireDate` TEXT NOT NULL,
 	`DepartmentId` INTEGER NOT NULL,
 	`EmployeeTypeId` INTEGER NOT NULL,
-	FOREIGN KEY (`DepartmentId`) REFERENCES Departments(`DepartmentId`),
-	FOREIGN KEY (`EmployeeTypeId`) REFERENCES EmployeeType(`EmployeeTypeId`)
+	FOREIGN KEY (`DepartmentId`) REFERENCES `Departments`(`DepartmentId`),
+	FOREIGN KEY (`EmployeeTypeId`) REFERENCES `EmployeeType`(`EmployeeTypeId`)
 );
 
 CREATE TABLE `Department` (
@@ -50,7 +50,7 @@ CREATE TABLE `Department` (
 	`Name` TEXT NOT NULL,
 	`Budget` INTEGER NOT NULL,
 	`SupervisorId` INTEGER NOT NULL,
-	FOREIGN KEY (`SupervisorId`) REFERENCES Employee(`EmployeeId`)
+	FOREIGN KEY (`SupervisorId`) REFERENCES `Employee`(`EmployeeId`)
 );
 
 CREATE TABLE `Computer` (
@@ -59,7 +59,7 @@ CREATE TABLE `Computer` (
 	`DecommissionDate` TEXT NOT NULL,
 	`Model` TEXT NOT NULL,
 	`EmployeeId` INTEGER NOT NULL,
-	FOREIGN KEY (`EmployeeId`) REFERENCES Employee(`EmployeeId`)
+	FOREIGN KEY (`EmployeeId`) REFERENCES `Employee`(`EmployeeId`)
 );
 
 CREATE TABLE `TrainingProgram` (
@@ -83,8 +83,8 @@ CREATE TABLE `Product` (
 	`Price` INTEGER NOT NULL,
 	`ProductTypeId` INTEGER NOT NULL,
 	`SellerId` INTEGER NOT NULL,
-	FOREIGN KEY (`ProductTypeId`) REFERENCES ProductType(`ProductTypeId`),
-	FOREIGN KEY (`SellerId`) REFERENCES Customer(`CustomerId`)
+	FOREIGN KEY (`ProductTypeId`) REFERENCES `ProductType`(`ProductTypeId`),
+	FOREIGN KEY (`SellerId`) REFERENCES `Customer`(`CustomerId`)
 );
 
 CREATE TABLE `Orders` (
@@ -92,11 +92,42 @@ CREATE TABLE `Orders` (
 	`OrderStatus` TEXT NOT NULL,
 	`CustomerId` INTEGER NOT NULL,
 	`PaymentTypeId` INTEGER NOT NULL
-	FOREIGN KEY (`CustomerId`) REFERENCES Customer(`CustomerId`),
-	FOREIGN KEY (`PaymentTypeId`) REFERENCES PaymentType(`PaymentTypeId`)
+	FOREIGN KEY (`CustomerId`) REFERENCES `Customer`(`CustomerId`),
+	FOREIGN KEY (`PaymentTypeId`) REFERENCES `PaymentType`(`PaymentTypeId`)
 );
 
+CREATE TABLE `PaymentType` (
+	`PaymentTypeId` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`Name` TEXT NOT NULL,
+	`AccountNumber` TEXT NOT NULL
+);
 
+CREATE TABLE `Customer` (
+	`CustomerId` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`FirstName` TEXT NOT NULL,
+	`LastName` TEXT NOT NULL,
+	`CreationDate` TEXT NOT NULL,
+	`IsInactive` BOOLEAN NOT NULL DEFAULT 0,
+	`DaysSinceActive` INTEGER NOT NULL DEFAULT 0,
+	`ActiveOrderId` INTEGER NOT NULL,
+	FOREIGN KEY (`ActiveOrderId`) REFERENCES `Orders`(`OrderId`)
+);
+
+CREATE TABLE `TrainingProgram_Employee` (
+	`TrainingProgram_EmployeeId` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`EmployeeId` INTEGER NOT NULL,
+	`TrainingProgramId` INTEGER NOT NULL,
+	FOREIGN KEY (`EmployeeId`) REFERENCES `Employee`(`EmployeeId`),
+	FOREIGN KEY (`TrainingProgramId`) REFERENCES `TrainingProgram`(`TrainingProgramId`)
+);
+
+CREATE TABLE `Order_Product` (
+	`Order_ProductId` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`OrderId` INTEGER NOT NULL,
+	`ProductId` INTEGER NOT NULL,
+	FOREIGN KEY (`OrderId`) REFERENCES `Orders`(`OrderId`),
+	FOREIGN KEY (`ProductId`) REFERENCES `Product`(`ProductId`)
+);
 
 
 
