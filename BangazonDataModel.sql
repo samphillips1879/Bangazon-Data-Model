@@ -45,3 +45,22 @@ CREATE TABLE `Employee` (
 	FOREIGN KEY (`EmployeeTypeId`) REFERENCES EmployeeType(`EmployeeTypeId`)
 );
 
+CREATE TABLE `Department` (
+	`DepartmentId` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`Name` TEXT NOT NULL,
+	`Budget` INTEGER NOT NULL,
+	`SupervisorId` INTEGER NOT NULL,
+	FOREIGN KEY (`SupervisorId`) REFERENCES Employee(`EmployeeId`)
+);
+
+CREATE TABLE `Computer` (
+	`ComputerId` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`PurchaseDate` TEXT NOT NULL,
+	`DecommissionDate` TEXT NOT NULL,
+	`Model` TEXT NOT NULL,
+	`EmployeeId` INTEGER NOT NULL,
+	FOREIGN KEY (`EmployeeId`) REFERENCES Employee(`EmployeeId`)
+);
+
+
+
