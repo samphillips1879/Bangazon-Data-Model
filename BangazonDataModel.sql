@@ -1,16 +1,16 @@
--- DELETE FROM Employees;
--- DELETE FROM Departments;
--- DELETE FROM Computers;
--- DELETE FROM TrainingPrograms;
--- DELETE FROM ProductTypes;
--- DELETE FROM Products;
--- DELETE FROM Orders;
--- DELETE FROM PaymentTypes;
--- DELETE FROM Customers;
--- DELETE FROM TrainingPrograms_Employees;
--- DELETE FROM Orders_Products;
--- DELETE FROM Employee_Types;
--- DELETE FROM Customers_PaymentTypes;
+-- DELETE FROM Employee;
+-- DELETE FROM Department;
+-- DELETE FROM Computer;
+-- DELETE FROM TrainingProgram;
+-- DELETE FROM ProductType;
+-- DELETE FROM Product;
+-- DELETE FROM Order;
+-- DELETE FROM PaymentType;
+-- DELETE FROM Customer;
+-- DELETE FROM TrainingProgram_Employee;
+-- DELETE FROM Order_Product;
+-- DELETE FROM Employee_Type;
+-- DELETE FROM Customer_PaymentType;
 
 
 
@@ -34,7 +34,7 @@ DROP TABLE IF EXISTS Customer_PaymentType;
 
 
 
-CREATE TABLE `Employees` (
+CREATE TABLE `Employee` (
 	`EmployeeId` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`FirstName` TEXT NOT NULL,
 	`LastName` TEXT NOT NULL,
