@@ -159,6 +159,28 @@ insert into Product select
 
 
 
+
+
+
+
+CREATE TABLE `PaymentType` (
+	`PaymentTypeId` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`Name` TEXT NOT NULL,
+	`AccountNumber` TEXT NOT NULL
+);
+
+insert into PaymentType values (null, "Visa", "11111111111112");
+
+
+
+
+
+
+
+
+
+
+
 CREATE TABLE `Orders` (
 	`OrderId` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`OrderStatus` TEXT NOT NULL,
@@ -172,12 +194,6 @@ CREATE TABLE `Orders` (
 
 
 
-
-CREATE TABLE `PaymentType` (
-	`PaymentTypeId` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	`Name` TEXT NOT NULL,
-	`AccountNumber` TEXT NOT NULL
-);
 
 
 
