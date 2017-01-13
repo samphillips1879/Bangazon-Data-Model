@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS Computer;
 DROP TABLE IF EXISTS TrainingProgram;
 DROP TABLE IF EXISTS ProductType;
 DROP TABLE IF EXISTS Product;
-DROP TABLE IF EXISTS Order;
+DROP TABLE IF EXISTS Orders;
 DROP TABLE IF EXISTS PaymentType;
 DROP TABLE IF EXISTS Customer;
 DROP TABLE IF EXISTS TrainingProgram_Employee;
@@ -61,6 +61,44 @@ CREATE TABLE `Computer` (
 	`EmployeeId` INTEGER NOT NULL,
 	FOREIGN KEY (`EmployeeId`) REFERENCES Employee(`EmployeeId`)
 );
+
+CREATE TABLE `TrainingProgram` (
+	`TrainingProgramId` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`Name` TEXT NOT NULL,
+	`StartDate` TEXT NOT NULL,
+	`EndDate` TEXT NOT NULL,
+	`MaximumAttendees` INTEGER NOT NULL
+);
+
+CREATE TABLE `ProductType` (
+	`ProductTypeId` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`Name` TEXT NOT NULL,
+	`Format` TEXT NOT NULL
+);
+
+CREATE TABLE `Product` (
+	`ProductId` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`Title` TEXT NOT NULL,
+	`Description` TEXT NOT NULL,
+	`Price` INTEGER NOT NULL,
+	`ProductTypeId` INTEGER NOT NULL,
+	`SellerId` INTEGER NOT NULL,
+	FOREIGN KEY (`ProductTypeId`) REFERENCES ProductType(`ProductTypeId`),
+	FOREIGN KEY (`SellerId`) REFERENCES Customer(`CustomerId`)
+);
+
+CREATE TABLE `Orders` (
+	`OrderId` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`OrderStatus` TEXT NOT NULL,
+	`CustomerId` INTEGER NOT NULL,
+	`PaymentTypeId` INTEGER NOT NULL
+	FOREIGN KEY (`CustomerId`) REFERENCES Customer(`CustomerId`),
+	FOREIGN KEY (`PaymentTypeId`) REFERENCES PaymentType(`PaymentTypeId`)
+);
+
+
+
+
 
 
 
