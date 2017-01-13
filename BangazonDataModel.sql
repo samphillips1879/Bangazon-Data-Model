@@ -178,22 +178,6 @@ insert into PaymentType select
 
 
 
-CREATE TABLE `Orders` (
-	`OrderId` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	`OrderStatus` TEXT NOT NULL,
-	`CustomerId` INTEGER NOT NULL,
-	`PaymentTypeId` INTEGER NOT NULL,
-	FOREIGN KEY (`CustomerId`) REFERENCES `Customer`(`CustomerId`),
-	FOREIGN KEY (`PaymentTypeId`) REFERENCES `PaymentType`(`PaymentTypeId`)
-);
-
-insert into Orders select
-	null, "Active", c.CustomerId, pt.PaymentTypeId
-	from Customer c, PaymentType pt
-	where c.FirstName = "Ben" and c.LastName = "Retersdor" and pt.Name = "Visa" and pt.CustomerId = c.CustomerId;
-
-
-
 
 
 CREATE TABLE `TrainingProgram` (
@@ -229,6 +213,22 @@ insert into TrainingProgram_Employee select
 
 
 
+CREATE TABLE `Orders` (
+	`OrderId` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`OrderStatus` TEXT NOT NULL,
+	`CustomerId` INTEGER NOT NULL,
+	`PaymentTypeId` INTEGER NOT NULL,
+	FOREIGN KEY (`CustomerId`) REFERENCES `Customer`(`CustomerId`),
+	FOREIGN KEY (`PaymentTypeId`) REFERENCES `PaymentType`(`PaymentTypeId`)
+);
+
+insert into Orders select
+	null, "Active", c.CustomerId, pt.PaymentTypeId
+	from Customer c, PaymentType pt
+	where c.FirstName = "Ben" and c.LastName = "Retersdor" and pt.Name = "Visa" and pt.CustomerId = c.CustomerId;
+
+
+
 
 
 
@@ -242,6 +242,13 @@ CREATE TABLE `Order_Product` (
 	FOREIGN KEY (`OrderId`) REFERENCES `Orders`(`OrderId`),
 	FOREIGN KEY (`ProductId`) REFERENCES `Product`(`ProductId`)
 );
+
+insert into Order_Product select
+	null, o.OrderId, p.ProductId
+	from Orders o, Product p, Customer c
+	where o.OrderStatus = "Active" and c.FirstName = "Ben" and c.LastName = "Retersdor" and p.Name = "Guitar" and o.CustomerId = c.CustomerId;
+
+
 
 
 
