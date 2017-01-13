@@ -91,7 +91,7 @@ CREATE TABLE `Orders` (
 	`OrderId` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`OrderStatus` TEXT NOT NULL,
 	`CustomerId` INTEGER NOT NULL,
-	`PaymentTypeId` INTEGER NOT NULL
+	`PaymentTypeId` INTEGER NOT NULL,
 	FOREIGN KEY (`CustomerId`) REFERENCES `Customer`(`CustomerId`),
 	FOREIGN KEY (`PaymentTypeId`) REFERENCES `PaymentType`(`PaymentTypeId`)
 );
@@ -129,7 +129,19 @@ CREATE TABLE `Order_Product` (
 	FOREIGN KEY (`ProductId`) REFERENCES `Product`(`ProductId`)
 );
 
+CREATE TABLE `Employee_Type` (
+	`Employee_TypeId` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`Name` TEXT NOT NULL,
+	`SecurityLevel` INTEGER NOT NULL
+);
 
+CREATE TABLE `Customer_PaymentType` (
+	`Customer_PaymentTypeId` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`CustomerId` INTEGER NOT NULL,
+	`PaymentTypeId` INTEGER NOT NULL,
+	FOREIGN KEY (`CustomerId`) REFERENCES `Customer`(`CustomerId`),
+	FOREIGN KEY (`PaymentTypeId`) REFERENCES `PaymentType`(`PaymentTypeId`)
+);
 
 
 
