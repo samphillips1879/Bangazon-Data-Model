@@ -41,9 +41,7 @@ CREATE TABLE `Employee` (
 	`HireDate` TEXT NOT NULL,
 	`DepartmentId` INTEGER NOT NULL,
 	`EmployeeTypeId` INTEGER NOT NULL,
-	FOREIGN KEY (`DepartmentId`) REFERENCES Departments(`DepartmentId`)
-
-
-
+	FOREIGN KEY (`DepartmentId`) REFERENCES Departments(`DepartmentId`),
+	FOREIGN KEY (`EmployeeTypeId`) REFERENCES EmployeeType(`EmployeeTypeId`)
 );
 
