@@ -101,15 +101,7 @@ insert into Computer select
 
 
 
-CREATE TABLE `TrainingProgram` (
-	`TrainingProgramId` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	`Name` TEXT NOT NULL,
-	`StartDate` TEXT NOT NULL,
-	`EndDate` TEXT NOT NULL,
-	`MaximumAttendees` INTEGER NOT NULL
-);
 
-insert into TrainingProgram values (null, "How to NOT be a Jerk", "Today", "Tomorrow", 50);
 
 
 
@@ -204,12 +196,15 @@ insert into Orders select
 
 
 
+CREATE TABLE `TrainingProgram` (
+	`TrainingProgramId` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`Name` TEXT NOT NULL,
+	`StartDate` TEXT NOT NULL,
+	`EndDate` TEXT NOT NULL,
+	`MaximumAttendees` INTEGER NOT NULL
+);
 
-
-
-
-
-
+insert into TrainingProgram values (null, "How to NOT be a Jerk", "Today", "Tomorrow", 50);
 
 
 
@@ -224,6 +219,16 @@ CREATE TABLE `TrainingProgram_Employee` (
 	FOREIGN KEY (`EmployeeId`) REFERENCES `Employee`(`EmployeeId`),
 	FOREIGN KEY (`TrainingProgramId`) REFERENCES `TrainingProgram`(`TrainingProgramId`)
 );
+
+
+insert into TrainingProgram_Employee select
+	null, e.EmployeeId, tp.TrainingProgramId
+	from Employee e, TrainingProgram tp
+	where e.FirstName = "Samuel" and e.LastName = "Phillips" and tp.Name = "How to NOT be a Jerk";
+
+
+
+
 
 
 
